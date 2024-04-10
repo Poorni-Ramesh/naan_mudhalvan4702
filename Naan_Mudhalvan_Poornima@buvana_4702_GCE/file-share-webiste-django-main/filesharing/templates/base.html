@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #DBb4AD; /* Background color */
+            color: #FFFFFF; /* Text color */
+            font-family: Arial, sans-serif; /* Font family */
+        }
+
+        .navbar {
+            background-color: #A2AD91 !important; /* Navigation bar color */
+        }
+
+        .navbar-toggler {
+            border-color: #000000; /* Button color */
+        }
+
+        .navbar-toggler-icon {
+            background-color: #000000; /* Button color */
+        }
+
+        .navbar-nav .nav-link {
+            color: #FFFFFF; /* Navigation link color */
+        }
+
+        .form-control {
+            background-color: #FFFFFF; /* Search input background color */
+            color: #000000; /* Search input text color */
+        }
+
+        .btn-outline-success {
+            color: #FFFFFF; /* Search button text color */
+            background-color: #000000; /* Search button background color */
+            border-color: #000000; /* Search button border color */
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">CollabNotes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+                {% if not request.session.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'file_upload' %}">Upload a file</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'settings' %}">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
